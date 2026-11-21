@@ -1,0 +1,879 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capeller Medicare | Smart Healthcare</title>
+
+<style>
+:root {
+    --primary: #07566a;
+    --secondary: #12b8a6;
+    --background: #f3f8fa;
+    --card: #ffffff;
+    --text: #18313d;
+    --muted: #71838b;
+}
+
+.dark {
+    --background: #101e25;
+    --card: #1b303a;
+    --text: #f1f7fa;
+    --muted: #b0c2ca;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    transition: .3s;
+}
+
+header {
+    background: var(--primary);
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #39e0c6;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #39e0c6;
+}
+
+button {
+    background: var(--secondary);
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: .85;
+}
+
+.hero {
+    padding: 90px 7%;
+    background: linear-gradient(120deg, #063d50, #087d85);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #e2f5f5;
+}
+
+.hero-box {
+    background: white;
+    color: #07566a;
+    padding: 45px;
+    border-radius: 18px;
+    text-align: center;
+    min-width: 260px;
+}
+
+.hero-box h1 {
+    font-size: 65px;
+}
+
+section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    color: var(--secondary);
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: var(--card);
+    padding: 28px;
+    border-radius: 13px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.05);
+}
+
+.card h3 {
+    margin: 13px 0;
+}
+
+.card p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.icon {
+    font-size: 42px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    background: var(--card);
+    padding: 30px;
+    border-radius: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #cbd8de;
+    border-radius: 7px;
+    background: var(--background);
+    color: var(--text);
+    font-size: 15px;
+}
+
+.form-container button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.appointment-section {
+    background: rgba(18,184,166,.07);
+}
+
+.dashboard {
+    display: none;
+}
+
+.dashboard.active {
+    display: block;
+}
+
+.dashboard-box {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.appointment-item {
+    background: var(--background);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 12px 0;
+    line-height: 1.8;
+}
+
+.delete-btn {
+    background: #c63d3d;
+    margin-top: 8px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#message {
+    text-align: center;
+    padding: 12px;
+    color: var(--secondary);
+    font-weight: bold;
+}
+
+footer {
+    background: #063d50;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 2;
+}
+
+footer p {
+    color: #d1e4e9;
+}
+
+@media(max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-box {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        CAPELLER <span>MEDICARE</span>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#doctors">Doctors</a>
+        <a href="#booking">Appointments</a>
+        <a href="#account">Account</a>
+        <button onclick="toggleTheme()">🌙</button>
+    </nav>
+</header>
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+        <h1>Healthcare Made Smarter.</h1>
+
+        <p>
+            Welcome to Capeller Medicare.
+            We are building a modern healthcare platform
+            designed to simplify healthcare access,
+            appointment management and patient services.
+        </p>
+
+        <a href="#booking">
+            <button>Book An Appointment →</button>
+        </a>
+    </div>
+
+    <div class="hero-box">
+        <h1>✚</h1>
+        <h2>CAPELLER MEDICARE</h2>
+        <p>Smart Healthcare. Better Living.</p>
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Explore our healthcare departments.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">🩺</div>
+            <h3>General Medicine</h3>
+            <p>General medical consultation services.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">❤️</div>
+            <h3>Cardiology</h3>
+            <p>Heart health information and specialist services.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🧠</div>
+            <h3>Neurology</h3>
+            <p>Neurological healthcare information and services.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">👨‍👩‍👧</div>
+            <h3>Family Healthcare</h3>
+            <p>Healthcare services for families.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DOCTORS -->
+
+<section id="doctors">
+
+    <div class="section-title">
+        <h2>Our Medical Team</h2>
+        <p>Explore our listed medical specialties.</p>
+    </div>
+
+    <input
+        type="search"
+        id="doctorSearch"
+        placeholder="Search medical specialty..."
+        oninput="searchDoctors()"
+    >
+
+    <div class="grid" id="doctorList">
+
+        <div class="card doctor">
+            <div class="icon">👨‍⚕️</div>
+            <h3>General Physician</h3>
+            <p>General Medicine</p>
+        </div>
+
+        <div class="card doctor">
+            <div class="icon">👩‍⚕️</div>
+            <h3>Cardiology Specialist</h3>
+            <p>Cardiology</p>
+        </div>
+
+        <div class="card doctor">
+            <div class="icon">👨‍⚕️</div>
+            <h3>Neurology Specialist</h3>
+            <p>Neurology</p>
+        </div>
+
+        <div class="card doctor">
+            <div class="icon">👩‍⚕️</div>
+            <h3>Family Physician</h3>
+            <p>Family Healthcare</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- REGISTRATION -->
+
+<section id="account">
+
+    <div class="section-title">
+        <h2>Patient Account</h2>
+        <p>Create a demo account or log in.</p>
+    </div>
+
+    <div class="form-container" id="registerBox">
+
+        <h3>Create Patient Account</h3>
+
+        <form id="registerForm">
+
+            <input id="regName" placeholder="Full Name" required>
+
+            <input id="regEmail" type="email"
+            placeholder="Email Address" required>
+
+            <input id="regPassword" type="password"
+            placeholder="Create Password (minimum 8 characters)"
+            minlength="8" required>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p style="margin-top:20px;">
+            Already registered?
+            <a href="#" onclick="showLogin()">Login here</a>
+        </p>
+
+    </div>
+
+    <div class="form-container hidden" id="loginBox">
+
+        <h3>Patient Login</h3>
+
+        <form id="loginForm">
+
+            <input id="loginEmail" type="email"
+            placeholder="Email Address" required>
+
+            <input id="loginPassword" type="password"
+            placeholder="Password" required>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p style="margin-top:20px;">
+            New patient?
+            <a href="#" onclick="showRegister()">Register here</a>
+        </p>
+
+    </div>
+
+    <div id="dashboard" class="dashboard">
+
+        <div class="dashboard-box">
+
+            <h2>Welcome, <span id="patientName"></span></h2>
+
+            <p>Your Capeller Medicare patient dashboard.</p>
+
+            <br>
+
+            <button onclick="logout()">Logout</button>
+
+        </div>
+
+        <div class="dashboard-box">
+
+            <h3>Your Appointments</h3>
+
+            <div id="appointmentList"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- APPOINTMENT BOOKING -->
+
+<section class="appointment-section" id="booking">
+
+    <div class="section-title">
+        <h2>Book An Appointment</h2>
+        <p>Log in to submit and manage your demo appointment requests.</p>
+    </div>
+
+    <div class="form-container">
+
+        <form id="appointmentForm">
+
+            <input id="patientFullName"
+            placeholder="Full Name" required>
+
+            <input id="patientPhone"
+            type="tel"
+            placeholder="Phone Number" required>
+
+            <select id="department" required>
+
+                <option value="">Choose Department</option>
+                <option>General Medicine</option>
+                <option>Cardiology</option>
+                <option>Neurology</option>
+                <option>Family Healthcare</option>
+
+            </select>
+
+            <input type="date" id="appointmentDate" required>
+
+            <select id="appointmentTime" required>
+
+                <option value="">Choose Time</option>
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+
+            </select>
+
+            <textarea id="appointmentReason"
+            placeholder="Reason for appointment (optional)"
+            rows="4"></textarea>
+
+            <button type="submit">
+                Submit Appointment
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <div class="section-title">
+        <h2>Contact Us</h2>
+        <p>Capeller Medicare customer support.</p>
+    </div>
+
+    <div class="card" style="text-align:center;">
+
+        <h3>CAPELLER MEDICARE</h3>
+
+        <p>Email: support@capellermedicare.com</p>
+
+        <p>Healthcare Without Boundaries.</p>
+
+        <p>Powered by Capeller Tech.</p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <h3>CAPELLER MEDICARE</h3>
+
+    <p>Smart Healthcare. Better Living.</p>
+
+    <p>© 2026 Capeller Medicare. All Rights Reserved.</p>
+
+</footer>
+
+<script>
+
+// THEME SWITCHER
+
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+}
+
+// DATE RESTRICTION
+
+const dateInput = document.getElementById("appointmentDate");
+
+dateInput.min = new Date().toISOString().split("T")[0];
+
+// DEMO DATA STORAGE
+
+function getUsers() {
+    return JSON.parse(localStorage.getItem("capellerUsers") || "[]");
+}
+
+function getAppointments() {
+    return JSON.parse(localStorage.getItem("capellerAppointments") || "[]");
+}
+
+function saveUsers(users) {
+    localStorage.setItem("capellerUsers", JSON.stringify(users));
+}
+
+function saveAppointments(appointments) {
+    localStorage.setItem("capellerAppointments", JSON.stringify(appointments));
+}
+
+// REGISTRATION
+
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("regName").value.trim();
+    const email = document.getElementById("regEmail").value.trim().toLowerCase();
+    const password = document.getElementById("regPassword").value;
+
+    const users = getUsers();
+
+    if (users.some(user => user.email === email)) {
+        alert("This email is already registered.");
+        return;
+    }
+
+    users.push({name, email, password});
+
+    saveUsers(users);
+
+    alert("Registration successful! You can now log in.");
+
+    showLogin();
+
+});
+
+// LOGIN
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+    const password = document.getElementById("loginPassword").value;
+
+    const users = getUsers();
+
+    const user = users.find(u =>
+        u.email === email && u.password === password
+    );
+
+    if (!user) {
+        alert("Incorrect email or password.");
+        return;
+    }
+
+    localStorage.setItem("capellerCurrentUser", user.email);
+
+    showDashboard();
+
+});
+
+// SHOW LOGIN
+
+function showLogin() {
+
+    document.getElementById("registerBox").classList.add("hidden");
+
+    document.getElementById("loginBox").classList.remove("hidden");
+
+}
+
+// SHOW REGISTER
+
+function showRegister() {
+
+    document.getElementById("loginBox").classList.add("hidden");
+
+    document.getElementById("registerBox").classList.remove("hidden");
+
+}
+
+// DASHBOARD
+
+function showDashboard() {
+
+    const email = localStorage.getItem("capellerCurrentUser");
+
+    const user = getUsers().find(u => u.email === email);
+
+    if (!user) return;
+
+    document.getElementById("registerBox").classList.add("hidden");
+
+    document.getElementById("loginBox").classList.add("hidden");
+
+    document.getElementById("dashboard").classList.add("active");
+
+    document.getElementById("patientName").textContent = user.name;
+
+    document.getElementById("patientFullName").value = user.name;
+
+    displayAppointments();
+
+}
+
+// LOGOUT
+
+function logout() {
+
+    localStorage.removeItem("capellerCurrentUser");
+
+    document.getElementById("dashboard").classList.remove("active");
+
+    showLogin();
+
+}
+
+// BOOK APPOINTMENT
+
+document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const email = localStorage.getItem("capellerCurrentUser");
+
+    if (!email) {
+        alert("Please create an account and log in before booking.");
+        document.getElementById("account").scrollIntoView();
+        showRegister();
+        return;
+    }
+
+    const appointments = getAppointments();
+
+    const appointment = {
+
+        id: Date.now(),
+
+        email: email,
+
+        name: document.getElementById("patientFullName").value,
+
+        phone: document.getElementById("patientPhone").value,
+
+        department: document.getElementById("department").value,
+
+        date: document.getElementById("appointmentDate").value,
+
+        time: document.getElementById("appointmentTime").value,
+
+        reason: document.getElementById("appointmentReason").value,
+
+        status: "Pending"
+
+    };
+
+    appointments.push(appointment);
+
+    saveAppointments(appointments);
+
+    document.getElementById("message").textContent =
+    "Your demo appointment request has been saved!";
+
+    this.reset();
+
+    displayAppointments();
+
+});
+
+// DISPLAY APPOINTMENTS
+
+function displayAppointments() {
+
+    const email = localStorage.getItem("capellerCurrentUser");
+
+    if (!email) return;
+
+    const appointments = getAppointments().filter(a => a.email === email);
+
+    const container = document.getElementById("appointmentList");
+
+    container.innerHTML = "";
+
+    if (appointments.length === 0) {
+
+        container.innerHTML = "<p>No appointments yet.</p>";
+
+        return;
+
+    }
+
+    appointments.forEach(a => {
+
+        const item = document.createElement("div");
+
+        item.className = "appointment-item";
+
+        const details = document.createElement("div");
+
+        details.textContent =
+        `Department: ${a.department} | Date: ${a.date} | Time: ${a.time} | Status: ${a.status}`;
+
+        const cancel = document.createElement("button");
+
+        cancel.className = "delete-btn";
+
+        cancel.textContent = "Cancel Request";
+
+        cancel.onclick = () => cancelAppointment(a.id);
+
+        item.appendChild(details);
+
+        item.appendChild(cancel);
+
+        container.appendChild(item);
+
+    });
+
+}
+
+// CANCEL APPOINTMENT
+
+function cancelAppointment(id) {
+
+    if (!confirm("Cancel this appointment request?")) return;
+
+    const appointments = getAppointments().filter(a => a.id !== id);
+
+    saveAppointments(appointments);
+
+    displayAppointments();
+
+}
+
+// SEARCH DOCTORS
+
+function searchDoctors() {
+
+    const query = document.getElementById("doctorSearch").value.toLowerCase();
+
+    document.querySelectorAll(".doctor").forEach(doctor => {
+
+        doctor.style.display =
+        doctor.textContent.toLowerCase().includes(query)
+        ? "block"
+        : "none";
+
+    });
+
+}
+
+// RESTORE LOGIN SESSION
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    const email = localStorage.getItem("capellerCurrentUser");
+
+    if (email && getUsers().some(u => u.email === email)) {
+
+        showDashboard();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```
